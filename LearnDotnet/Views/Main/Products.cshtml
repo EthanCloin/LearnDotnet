@@ -2,9 +2,17 @@
 @{
     Layout = null;
 }
+<style>
+    .product-summary {
+        padding-left: 2rem;
+    }
+</style>
 <div>
     @foreach (var product in Model)
     {
-        <p>@product.Name stock=@product.UnitsStocked id=@product.ProductID</p>
+        <details class="product-summary">
+            <summary hx-get="/Main/Ingredients?productID=@product.ProductID" hx-swap="innerHTML" hx-target="next div" hx-trigger="click">@product.Name stock=@product.UnitsStocked id=@product.ProductID</summary>
+            <div></div>
+        </details>
     }
 </div>

@@ -1,0 +1,17 @@
+@model IEnumerable<ProductIngredientDisplayModel>
+@{
+Layout = null;
+}
+<style>
+    .ingredient-detail {
+        padding-left: 2rem;
+        margin-bottom: 0;
+    }
+</style>
+<div>
+    <p style="margin-bottom: 0">Contains: </p>
+    @foreach (var ingredient in Model)
+    {
+        <p class="ingredient-detail">@ingredient.IngredientQuantity @ingredient.Name</p>
+    }
+</div>

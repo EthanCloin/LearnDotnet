@@ -30,4 +30,14 @@ public class MainController : Controller
         products = await repository.GetProductsByOrder(orderID.Value);
        return PartialView("Products", products); 
     }
+
+    public async Task<IActionResult> Ingredients([FromQuery] int? productID)
+    {
+        if (productID == null)
+        {
+            return PartialView("Ingredients");
+        }
+        var ingredients = await repository.GetIngredientsByProduct(productID.Value);
+        return PartialView("Ingredients", ingredients);
+    }
 }

@@ -41,4 +41,19 @@ WHERE op.OrderID = {orderID}";
         connection.Close();
         return products;
     }
+
+    public async Task<IEnumerable<ProductIngredientDisplayModel>> GetIngredientsByProduct(int productID)
+    {
+        var sql = $@"
+SELECT i.Name, i.Description, pi.IngredientQuantity
+FROM ProductIngredients pi
+JOIN Ingredients i ON i.IngredientID = pi.IngredientID
+WHERE pi.ProductID = {productID}
+ORDER BY pi.IngredientQuantity";
+
+        connection.Open();
+        var ingredients = await connection.QueryAsync<ProductIngredientDisplayModel>(sql);
+        connection.Close();
+        return ingredients;
+    }
 }
