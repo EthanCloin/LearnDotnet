@@ -1,3 +1,5 @@
+@model IEnumerable<OrderModel>
+
 @{
     Layout = "_Layout";
     ViewData["Title"] = "Orders";
@@ -6,8 +8,9 @@
 <div>
     <p>This is the Orders View</p>
     <div>
-        <div hx-get="/" hx-swap="none" hx-trigger="click">Order 1</div>
-        <div>Order 1</div>
-        <div>Order 1</div>
+        @foreach (var order in Model)
+        {
+            <div hx-get="/" hx-swap="none" hx-trigger="click">Order @order.OrderID</div>
+        }
     </div>
 </div>

@@ -6,8 +6,15 @@ namespace LearnDotnet.Controllers;
 
 public class MainController : Controller
 {
-    public IActionResult Orders()
+    private readonly MainRepository repository;
+
+    public MainController(MainRepository repository)
     {
-        return View("OrderExpander");
+        this.repository = repository;
+    }
+    public async Task<IActionResult> Orders()
+    {
+        var orders = await repository.GetOrders();
+        return View("OrderExpander", orders);
     }
 }
