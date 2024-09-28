@@ -20,4 +20,25 @@ public class MainRepository
         connection.Close();
         return orders;
     }
+
+    public async Task<IEnumerable<ProductModel>> GetProducts()
+    {
+        var sql = "SELECT ProductID, Name, UnitsStocked FROM Products";
+        connection.Open();
+        var products = await connection.QueryAsync<ProductModel>(sql);
+        connection.Close();
+        return products;
+    }
+
+    public async Task<IEnumerable<ProductModel>> GetProductsByOrder(int orderID)
+    {
+        var sql = $@"
+SELECT p.ProductID, p.Name, p.UnitsStocked FROM Products p
+JOIN OrderProducts op ON p.ProductID = op.ProductID
+WHERE op.OrderID = {orderID}";
+        connection.Open();
+        var products = await connection.QueryAsync<ProductModel>(sql);
+        connection.Close();
+        return products;
+    }
 }

@@ -17,4 +17,17 @@ public class MainController : Controller
         var orders = await repository.GetOrders();
         return View("OrderExpander", orders);
     }
+
+    public async Task<IActionResult> Products([FromQuery] int? orderID)
+    {
+        IEnumerable<ProductModel> products;
+        if (orderID == null)
+        {
+            products = await repository.GetProducts();
+            Console.WriteLine("oop no id");
+            return PartialView("Products", products);
+        }
+        products = await repository.GetProductsByOrder(orderID.Value);
+       return PartialView("Products", products); 
+    }
 }
