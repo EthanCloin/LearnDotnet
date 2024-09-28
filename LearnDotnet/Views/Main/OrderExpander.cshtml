@@ -10,7 +10,10 @@
     <div>
         @foreach (var order in Model)
         {
-            <div hx-get="/Main/Products?orderID=@order.OrderID" hx-swap="beforeend" hx-target="this" hx-trigger="click">Order @order.OrderID</div>
+            <details>
+                <summary hx-get="/Main/Products?orderID=@order.OrderID" hx-swap="innerHTML" hx-target="next div" hx-trigger="click">Order @order.OrderID</summary>
+                <div>content</div>
+            </details>
         }
     </div>
 </div>
