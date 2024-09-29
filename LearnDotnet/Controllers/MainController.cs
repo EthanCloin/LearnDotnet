@@ -15,7 +15,7 @@ public class MainController : Controller
     public async Task<IActionResult> Orders()
     {
         var orders = await repository.GetOrders();
-        return View("OrderExpander", orders);
+        return View("Orders", orders);
     }
 
     public async Task<IActionResult> Products([FromQuery] int? orderID)
@@ -39,5 +39,10 @@ public class MainController : Controller
         }
         var ingredients = await repository.GetIngredientsByProduct(productID.Value);
         return PartialView("Ingredients", ingredients);
+    }
+
+    public IActionResult Dashboard()
+    {
+        return View("Dashboard");
     }
 }

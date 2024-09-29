@@ -1,0 +1,34 @@
+@{
+ViewData["Title"] = "Order Dashboard";
+}
+<style>
+    .filter-group {
+        display: flex;
+        align-content: space-between;
+        width: 40vw;
+        label {
+            padding: 2px;
+            margin: 2px;
+            border: black solid 1px;
+        }
+        input[type=checkbox] {
+            display:  none;
+        }
+        input[type=checkbox]:checked + label{
+            background-color: lightgray;    
+        }
+    }
+</style>
+<div >
+    <p>Order Status Filters:</p>
+    <div class="filter-group">
+        @foreach (var status in Enum.GetValues(typeof(OrderStatus)))
+        {
+        <input type="checkbox" id="@status.ToString()" name="@status.ToString()" onchange="console.log('changed')"/>
+        <label for="@status.ToString()">
+            @status
+        </label>
+        }
+    </div>
+</div>
+<div hx-get="/Main/Orders" hx-trigger="load once" hx-target="this" hx-swap="outerHTML">Content to become Orders</div>

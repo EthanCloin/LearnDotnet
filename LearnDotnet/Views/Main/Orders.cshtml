@@ -1,0 +1,17 @@
+@model IEnumerable<OrderModel>
+@{
+    Layout = null;
+}
+<div>
+    <div>
+        @foreach (var order in Model)
+        {
+            <details>
+                <summary hx-get="/Main/Products?orderID=@order.OrderID" hx-swap="innerHTML" hx-target="next div" hx-trigger="click">
+                    Order @order.OrderID - @order.Status
+                </summary>
+                <div>content</div>
+            </details>
+        }
+    </div>
+</div>
