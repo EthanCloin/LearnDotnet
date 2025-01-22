@@ -1,18 +1,19 @@
 @model IEnumerable<ProductModel>
-@{
+    @{
     Layout = null;
-}
-<style>
-    .product-summary {
-        padding-left: 2rem;
     }
-</style>
-<div>
-    @foreach (var product in Model)
-    {
-        <details class="product-summary">
-            <summary hx-get="/Main/Ingredients?productID=@product.ProductID" hx-swap="innerHTML" hx-target="next div" hx-trigger="click">@product.Name stock=@product.UnitsStocked id=@product.ProductID</summary>
+    <style>
+        .product-summary {
+            padding-left: 2rem;
+        }
+    </style>
+    <div>
+        @foreach (var product in Model)
+        {
+        <details class="product-summary" style="background-color: #90caf9">
+            <summary hx-get="/Main/Ingredients?productID=@product.ProductID" hx-swap="innerHTML" hx-target="next div"
+                hx-trigger="click">@product.Name stock=@product.UnitsStocked id=@product.ProductID</summary>
             <div></div>
         </details>
-    }
-</div>
+        }
+    </div>
